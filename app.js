@@ -1,44 +1,120 @@
-const Employee = require("./employee");
-const Engineer = require("./engineer");
-const Manager = require("./engineer");
-const Intern = require("./intern");
+const Employee = require("./lib/employee");
+const Engineer = require("./lib/engineer");
+const Manager = require("./lib/manager");
+const Intern = require("./lib/intern");
 const inquirer = require("inquirer");
-const inquirer = require("fs");
+const fs = require("fs");
+const card = [];
 
 function promptUser() {
-    inquirer
-      .prompt([
-        {
-          message: "Enter your name",
-          name: "username",
-          type: "input"
-        },
-        {
-          message: "Enter your id",
-          name: "id",
-          type: "number"
-        },
-        {
-            message: "Enter your email",
-            name: "email",
-            type: "input"
-        }
-      ])
-      .then(function ({ username, id, email }) {
-          console.log(username,id,email)
-      });  
+  inquirer
+    .prompt([
+      {
+        message: "Enter your name",
+        name: "name",
+        type: "input"
+      },
+      {
+        message: "Enter your id",
+        name: "id",
+        type: "number"
+      },
+      {
+        message: "Enter your email",
+        name: "email",
+        type: "input"
+      },
+      {
+        message: "Enter your Role",
+        name: "role",
+        type: "list",
+        choices: [
+          'Manager',
+          'Engineer',
+          'Intern',
+        ]
+      }
+    ])
+    .then(function ({ name, id, email, role }) {
+      if (role === 'Manager') {
+        inquirer
+          .prompt([
+            {
+              message: "Enter your office number",
+              name: "officenumber",
+              type: "number"
+            }
+          ]).then(function ({ officenumber }) {
+            const manager = new Manager(name, id, email, officenumber);
+            console.log(manager);
 
+            $.get("main.html", function (data) {
+              $(this).children("div:first").html(data);
+            });
+          });
+      }
+      else if (role === 'Engineer') {
+        inquirer
+          .prompt([
+            {
+              message: "Enter your github account name",
+              name: "github",
+              type: "input"
+            }
+          ]).then(function ({ github }) {
+            const engineer = new Engineer(name, id, email, github);
+            console.log(engineer);
+          });
+      }
+      else if (role === 'Intern') {
+        inquirer
+          .prompt([
+            {
+              message: "Enter name of your School",
+              name: "school",
+              type: "input"
+            }
+          ]).then(function ({ school }) {
+            const intern = new Intern(name, id, email, school);
+            console.log(intern);
+          });
+      }
+    });
+}
 
-// const restaurant = new Restaurant("McJared's");
+function addEmp() {
+  return inquirer.prompt([
+    {
+      message: "Would you like to add an employee to the team?",
+      name: "add",
+      type: "list",
+      choices: [
+        'yes',
+        'no',
+      ]
+    }
+  ])
+}
 
-// const items = [
-//   new Item("Burger", 5.99),
-//   new Item("Soda", 3.5),
-//   new Item("Chips", 2.0)
-// ];
+function iterate(answer) {
+  if (answer.add === 'yes') {
+    initiate()
+  }
+  else {
+    console.log("\nGoodbye!");
+    process.exit(0);
+  }
+};
 
-// const orders = items.map(item => new Order(item));
+async function initiate() {
+  try {
+    await promptUser();
+    const answer = await addEmp();
+    iterate(answer);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-// orders.forEach(order => restaurant.takeOrder(order));
+initiate();
 
-// restaurant.prepareOrders();
