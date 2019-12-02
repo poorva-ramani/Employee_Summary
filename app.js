@@ -47,10 +47,6 @@ function promptUser() {
           ]).then(function ({ officenumber }) {
             const manager = new Manager(name, id, email, officenumber);
             console.log(manager);
-
-            $.get("main.html", function (data) {
-              $(this).children("div:first").html(data);
-            });
           });
       }
       else if (role === 'Engineer') {
