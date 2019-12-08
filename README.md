@@ -19,3 +19,10 @@ Note: you can run the tests at any time with `npm run test`
 ## User input
 User is prompted to build an engineering team. An engineering
 team consists of a manager, and any number of engineers and interns.
+
+## Demo
+
+![](/assets/Employee_Summary_demo.gif)
+
+## Sample Output
+![](/assets/Team_Main_Page_and_Employee_Summary.png)
