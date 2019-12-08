@@ -74,9 +74,8 @@ function generateRoleQ(input) {
 function addCards(response, roleQ) {
   if (response.role === 'Manager') {
     const officenumber = roleQ.officenumber;
-    console.log(officenumber)
-    const manager = new Manager(response.name, response.id, response.email, officenumber);
-    console.log(manager);
+    //const manager = new Manager(response.name, response.id, response.email, officenumber);
+    //console.log(manager);
     const managerCard =
       `<div class="col-4">
               <div class="card bg-primary mb-3" style="max-width: 18rem;">
@@ -106,8 +105,8 @@ function addCards(response, roleQ) {
 
   else if (response.role === 'Engineer') {
     const github = roleQ.github;
-    const engineer = new Engineer(response.name, response.id, response.email, github);
-    console.log(engineer);
+    //const engineer = new Engineer(response.name, response.id, response.email, github);
+    //console.log(engineer);
     const engineerCard =
       `<div class="col-4">
               <div class="card bg-primary mb-3" style="max-width: 18rem;">
@@ -137,8 +136,8 @@ function addCards(response, roleQ) {
 
   else if (response.role === 'Intern') {
     const school = roleQ.school;
-    const intern = new Intern(response.name, response.id, response.email, school);
-    console.log(intern);
+    //const intern = new Intern(response.name, response.id, response.email, school);
+    //console.log(intern);
     const engineerCard =
       `<div class="col-4">
               <div class="card bg-primary mb-3" style="max-width: 18rem;">
